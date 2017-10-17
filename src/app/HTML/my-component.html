@@ -1,19 +1,18 @@
 <div id="menuSection">
     <nav>
         <input #txtSize id="size" type="text">
-        <button class="btn" (click)="generarTabla(txtSize.value)">Generar tabla</button>
+        <button class="btn" (click)="getSize(txtSize.value)" type="submit">Generar tabla</button>
+        <button class="btn" type="submit" (click)="clean()">Limpiar</button>
     </nav>
 <div>
     
-<section id="tableroSection">
-
-</section>
-
-
-<!--<div *ngIf="Arr1">
-      <table id="tabla" class="table-bordered">
+<div *ngIf="Arr1.length!=null">
+        <table id="tabla" class="table-bordered">
         <tr *ngFor="let i of Arr1">
-            <td #el id="prefab" *ngFor="let i of Arr1" style="background-color:black" (click)="changeColor(el)"></td>
+           <td #el class="celda" *ngFor="let i of Arr1" style="background-color:black" (click)="changeColor(el)"></td>
         </tr>   
-    </table> 
-</div>-->
+      </table> 
+</div>
+<!--
+
+-->
