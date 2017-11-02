@@ -2,8 +2,9 @@
     <nav>
         <input #txtSize id="size" type="text">
         <button class="btn" (click)="generateTable(txtSize.value)" type="submit">Generar tabla</button>
-        <button class="btn" type="submit" (click)="play()">Colorear</button>
-        <button class="btn" type="submit" (click)="loopMode()">Loop</button>
+        <button class="btn" type="submit" (click)="play()">Paso a paso</button>
+        <button class="btn" type="submit" (click)="startLoop()">Ciclado</button>
+        <button class="btn" type="submit" (click)="stop()">Detener</button>
     </nav>
 <div>
     

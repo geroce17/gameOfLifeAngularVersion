@@ -11,8 +11,14 @@ export class MyComponent {
     arr;
     num = null;
     
-    loopMode() { 
-        setInterval(() => { this.play(); }, 10);
+    interval;
+
+    startLoop() {
+        this.interval = setInterval(() => { this.play(); }, 10);
+    }
+
+    stop(){
+        clearInterval(this.interval);
     }
 
     changeColor(celda: HTMLTableCellElement) {
