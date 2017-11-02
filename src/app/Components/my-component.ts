@@ -11,7 +11,16 @@ export class MyComponent {
     arr;
     num = null;
 
-    generarTabla() {
+    changeColor(celda: HTMLTableCellElement) {
+        if (celda.style.backgroundColor === 'black') {
+            celda.style.backgroundColor = 'white';
+        }
+
+        else
+            celda.style.backgroundColor = 'black';
+    }
+
+    generateTable() {
         this.arr = [];
         this.num = parseFloat((<HTMLInputElement>document.getElementById('size')).value);
         for (let index = 0; index < this.num; index++) {
@@ -19,19 +28,30 @@ export class MyComponent {
         }
     }
 
-    iniciar() {
-        let x = <HTMLTableElement>document.getElementById('MyTable');
-        for (var index = 0; index < this.num; index++) {
-            x.rows[index].cells[index].style.backgroundColor ="blue";
-        }
-    }
-    changeColor(celda: HTMLTableCellElement) {
-    if (celda.style.backgroundColor === 'black') {
-        celda.style.backgroundColor = 'white';
-    }
+    play() {
+        let el, up, down, right, left, dls, dli, drs, dri, val, antEl, antVal, cont;
+        let table = <HTMLTableElement>document.getElementById('MyTable');
 
-    else
-            celda.style.backgroundColor = 'black';
+        for (let index = 0; index < this.num; index++) {
+            for (let index2 = 0; index2 < this.num; index2++) {
+                el = table.rows[index].cells[index2];
+                val = false;
+                cont = 0;
+                dls = dli = drs = dri = undefined;
+                up = down = left = right = undefined;
+                cont = escanearCuadros(index, index2, this.num, down, left, up, dls, dli, drs, dri, cont);
+                if(cont == 3)
+                {
+                    val = true;
+                    asignRes.push(el);
+                }
+                if(cont<2 || cont>3){
+                    asignKill.push(el);
+                }
+            }
+        }
+        reviveCells(asignRes);
+        removeCells(asignKill);
     }
 }
 
