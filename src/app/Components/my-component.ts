@@ -10,6 +10,10 @@ import { arrayObj } from './arrayObj';
 export class MyComponent {
     arr;
     num = null;
+    
+    loopMode() { 
+        setInterval(() => { this.play(); }, 10);
+    }
 
     changeColor(celda: HTMLTableCellElement) {
         if (celda.style.backgroundColor === 'black') {
