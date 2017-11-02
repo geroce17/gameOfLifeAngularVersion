@@ -31,7 +31,7 @@ export class MyComponent {
     play() {
         let el, up, down, right, left, dls, dli, drs, dri, val, antEl, antVal, cont;
         let table = <HTMLTableElement>document.getElementById('MyTable');
-
+        let asignRes = [], asignKill = [];
         for (let index = 0; index < this.num; index++) {
             for (let index2 = 0; index2 < this.num; index2++) {
                 el = table.rows[index].cells[index2];
@@ -50,8 +50,17 @@ export class MyComponent {
                 }
             }
         }
-        reviveCells(asignRes);
-        removeCells(asignKill);
+        this.reviveCells(asignRes);
+        this.removeCells(asignKill);
+    }
+    reviveCells(asignRes) {
+        for(let i = asignRes.length - 1; i >= 0; i--)
+        asignRes[i].style.backgroundColor = 'white';
+    }
+
+    removeCells(asignKill) {
+        for(let i = asignKill.length - 1; i >= 0; i--)
+        asignKill[i].style.backgroundColor = 'black';
     }
 }
 
