@@ -34,12 +34,12 @@ export class MyComponent {
         let asignRes = [], asignKill = [];
         for (let index = 0; index < this.num; index++) {
             for (let index2 = 0; index2 < this.num; index2++) {
-                el = table.rows[index].cells[index2];
+                el = table[index][index2];
                 val = false;
                 cont = 0;
                 dls = dli = drs = dri = undefined;
                 up = down = left = right = undefined;
-                cont = escanearCuadros(index, index2, this.num, down, left, up, dls, dli, drs, dri, cont);
+                cont = this.scanCells(table, index, index2, this.num, right, down, left, up, dls, dli, drs, dri, cont);
                 if(cont == 3)
                 {
                     val = true;
@@ -62,7 +62,153 @@ export class MyComponent {
         for(let i = asignKill.length - 1; i >= 0; i--)
         asignKill[i].style.backgroundColor = 'black';
     }
-}
+
+    scanCells (table, r, c, size, right, down, left, up, dls, dli, drs, dri, cont) {
+        if(size <= 2){
+            if(r==0 && c==0)
+            {
+                right=table[r][c+1];
+                down=table[r+1][c];
+                dri=table[r+1][c+1];
+            }
+            else
+            {
+                if(r==0 && c==1)
+                {
+                    left=table[r][c-1];
+                    down=table[r+1][c];
+                    dli=table[r+1][c-1];
+                }
+                else
+                {
+                    if(r==1 && c==0)
+                    {
+                        up=table[r-1][c];
+                        right=table[r][c+1];
+                        drs=table[r-1][c+1];
+                    }
+                    else
+                    {
+                        if(r==1 && c==1)
+                        {
+                            up=table[r-1][c];
+                            dls=table[r-1][c-1];
+                            left=table[r][c-1];
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            if(r==0 && c==0)
+            {
+                right=table[r][c+1];
+                down=table[r+1][c];
+                dri=table[r+1][c+1];
+            }
+            else
+            {
+                if(r==0 && (c>0 && c<size-1))
+                {
+                    down=table[r+1][c];
+                    right=table[r][c+1];
+                    left=table[r][c-1];
+                    dli=table[r+1][c-1];
+                    dri=table[r+1][c+1];
+                }
+                else
+                {
+                    if(r==0 && c==size-1)
+                    {
+                        left=table[r][c-1];
+                        down=table[r+1][c];
+                        dli=table[r+1][c-1];
+                    }
+                    else
+                    {
+                        if((r>0 && r<size-1) && c==0)
+                        {
+                            right=table[r][c+1];
+                            up=table[r-1][c];
+                            down=table[r+1][c];
+                            dri=table[r+1][c+1];
+                            drs=table[r-1][c+1];
+                        }
+                        else
+                        {
+                            if(r==size-1 && c==0)
+                            {
+                                up=table[r-1][c];
+                                right=table[r][c+1];
+                                drs=table[r-1][c+1];
+                            }
+                            else
+                            {
+                                if(r==size-1 && (c>0 && c<size-1))
+                                {
+                                    up=table[r-1][c];
+                                    right=table[r][c+1];
+                                    left=table[r][c-1];
+                                    dls=table[r-1][c-1];
+                                    drs=table[r-1][c+1];
+                                }
+                                else
+                                {
+                                    if(r==size-1 && c==size-1)
+                                    {
+                                        up=table[r-1][c];
+                                        dls=table[r-1][c-1];
+                                        left=table[r][c-1];
+                                    }
+                                    else
+                                    {
+                                        if((r>0 && r<size-1) && c==size-1)
+                                        {
+                                            left=table[r][c-1];
+                                            down=table[r+1][c];
+                                            up=table[r-1][c];
+                                            dli=table[r+1][c-1];
+                                            dls=table[r-1][c-1];
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if((r>0 && r<size-1) && (c>0 && c<size-1))
+        {
+            up=table[r-1][c];
+            down=table[r+1][c];
+            right=table[r][c+1];
+            left=table[r][c-1];
+            dls=table[r-1][c-1];
+            dli=table[r+1][c-1];
+            drs=table[r-1][c+1];
+            dri=table[r+1][c+1];
+        }
+        
+        if(up!=undefined && up.style.backgroundColor=="white")
+            cont++;
+        if(down!=undefined && down.style.backgroundColor=="white")
+            cont++;
+        if(left!=undefined && left.style.backgroundColor=="white")
+            cont++;
+        if(right!=undefined && right.style.backgroundColor=="white")
+            cont++;
+        if(dls!=undefined && dls.style.backgroundColor=="white")
+            cont++;
+        if(dli!=undefined && dli.style.backgroundColor=="white")
+            cont++;
+        if(drs!=undefined && drs.style.backgroundColor=="white")
+            cont++;
+        if(dri!=undefined && dri.style.backgroundColor=="white")
+            cont++;
+        return cont;
+    }
 
 // Descartados
 
