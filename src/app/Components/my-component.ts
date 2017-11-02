@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { arrayObj } from './arrayObj';
 
 @Component({
     selector: 'app-my-component',
@@ -7,20 +8,23 @@ import { Component } from '@angular/core';
 })
 
 export class MyComponent {
-    Arr1: number [] = new Array();
+    arr;
     num = null;
 
-    getSize() {
+    generarTabla() {
+        this.arr = [];
         this.num = parseFloat((<HTMLInputElement>document.getElementById('size')).value);
         for (let index = 0; index < this.num; index++) {
-            this.Arr1.push(index);
+            this.arr.push(index);
         }
     }
 
-    clean() {
-        this.Arr1 = [];
+    iniciar() {
+        let x = <HTMLTableElement>document.getElementById('MyTable');
+        for (var index = 0; index < this.num; index++) {
+            x.rows[index].cells[index].style.backgroundColor ="blue";
+        }
     }
-
     changeColor(celda: HTMLTableCellElement) {
     if (celda.style.backgroundColor === 'black') {
         celda.style.backgroundColor = 'white';
@@ -29,9 +33,9 @@ export class MyComponent {
     else
             celda.style.backgroundColor = 'black';
     }
+}
 
-
-    // Descartados
+// Descartados
 
     /*
     getSize() {
@@ -67,4 +71,3 @@ export class MyComponent {
         tabla.setAttribute('border', '.1');
     }
      */
-}
