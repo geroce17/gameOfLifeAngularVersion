@@ -34,7 +34,7 @@ export class MyComponent {
         let asignRes = [], asignKill = [];
         for (let index = 0; index < this.num; index++) {
             for (let index2 = 0; index2 < this.num; index2++) {
-                el = table[index][index2];
+                el = table.rows[index].cells[index2];
                 val = false;
                 cont = 0;
                 dls = dli = drs = dri = undefined;
@@ -53,6 +53,7 @@ export class MyComponent {
         this.reviveCells(asignRes);
         this.removeCells(asignKill);
     }
+    
     reviveCells(asignRes) {
         for(let i = asignRes.length - 1; i >= 0; i--)
         asignRes[i].style.backgroundColor = 'white';
@@ -67,33 +68,33 @@ export class MyComponent {
         if(size <= 2){
             if(r==0 && c==0)
             {
-                right=table[r][c+1];
-                down=table[r+1][c];
-                dri=table[r+1][c+1];
+                right=table.rows[r].cells[c+1];
+                down=table.rows[r+1].cells[c];
+                dri=table.rows[r+1].cells[c+1];
             }
             else
             {
                 if(r==0 && c==1)
                 {
-                    left=table[r][c-1];
-                    down=table[r+1][c];
-                    dli=table[r+1][c-1];
+                    left=table.rows[r].cells[c-1];
+                    down=table.rows[r+1].cells[c];
+                    dli=table.rows[r+1].cells[c-1];
                 }
                 else
                 {
                     if(r==1 && c==0)
                     {
-                        up=table[r-1][c];
-                        right=table[r][c+1];
-                        drs=table[r-1][c+1];
+                        up=table.rows[r-1].cells[c];
+                        right=table.rows[r].cells[c+1];
+                        drs=table.rows[r-1].cells[c+1];
                     }
                     else
                     {
                         if(r==1 && c==1)
                         {
-                            up=table[r-1][c];
-                            dls=table[r-1][c-1];
-                            left=table[r][c-1];
+                            up=table.rows[r-1].cells[c];
+                            dls=table.rows[r-1].cells[c-1];
+                            left=table.rows[r].cells[c-1];
                         }
                     }
                 }
@@ -103,73 +104,73 @@ export class MyComponent {
         {
             if(r==0 && c==0)
             {
-                right=table[r][c+1];
-                down=table[r+1][c];
-                dri=table[r+1][c+1];
+                right=table.rows[r].cells[c+1];
+                down=table.rows[r+1].cells[c];
+                dri=table.rows[r+1].cells[c+1];
             }
             else
             {
                 if(r==0 && (c>0 && c<size-1))
                 {
-                    down=table[r+1][c];
-                    right=table[r][c+1];
-                    left=table[r][c-1];
-                    dli=table[r+1][c-1];
-                    dri=table[r+1][c+1];
+                    down=table.rows[r+1].cells[c];
+                    right=table.rows[r].cells[c+1];
+                    left=table.rows[r].cells[c-1];
+                    dli=table.rows[r+1].cells[c-1];
+                    dri=table.rows[r+1].cells[c+1];
                 }
                 else
                 {
                     if(r==0 && c==size-1)
                     {
-                        left=table[r][c-1];
-                        down=table[r+1][c];
-                        dli=table[r+1][c-1];
+                        left=table.rows[r].cells[c-1];
+                        down=table.rows[r+1].cells[c];
+                        dli=table.rows[r+1].cells[c-1];
                     }
                     else
                     {
                         if((r>0 && r<size-1) && c==0)
                         {
-                            right=table[r][c+1];
-                            up=table[r-1][c];
-                            down=table[r+1][c];
-                            dri=table[r+1][c+1];
-                            drs=table[r-1][c+1];
+                            right=table.rows[r].cells[c+1];
+                            up=table.rows[r-1].cells[c];
+                            down=table.rows[r+1].cells[c];
+                            dri=table.rows[r+1].cells[c+1];
+                            drs=table.rows[r-1].cells[c+1];
                         }
                         else
                         {
                             if(r==size-1 && c==0)
                             {
-                                up=table[r-1][c];
-                                right=table[r][c+1];
-                                drs=table[r-1][c+1];
+                                up=table.rows[r-1].cells[c];
+                                right=table.rows[r].cells[c+1];
+                                drs=table.rows[r-1].cells[c+1];
                             }
                             else
                             {
                                 if(r==size-1 && (c>0 && c<size-1))
                                 {
-                                    up=table[r-1][c];
-                                    right=table[r][c+1];
-                                    left=table[r][c-1];
-                                    dls=table[r-1][c-1];
-                                    drs=table[r-1][c+1];
+                                    up=table.rows[r-1].cells[c];
+                                    right=table.rows[r].cells[c+1];
+                                    left=table.rows[r].cells[c-1];
+                                    dls=table.rows[r-1].cells[c-1];
+                                    drs=table.rows[r-1].cells[c+1];
                                 }
                                 else
                                 {
                                     if(r==size-1 && c==size-1)
                                     {
-                                        up=table[r-1][c];
-                                        dls=table[r-1][c-1];
-                                        left=table[r][c-1];
+                                        up=table.rows[r-1].cells[c];
+                                        dls=table.rows[r-1].cells[c-1];
+                                        left=table.rows[r].cells[c-1];
                                     }
                                     else
                                     {
                                         if((r>0 && r<size-1) && c==size-1)
                                         {
-                                            left=table[r][c-1];
-                                            down=table[r+1][c];
-                                            up=table[r-1][c];
-                                            dli=table[r+1][c-1];
-                                            dls=table[r-1][c-1];
+                                            left=table.rows[r].cells[c-1];
+                                            down=table.rows[r+1].cells[c];
+                                            up=table.rows[r-1].cells[c];
+                                            dli=table.rows[r+1].cells[c-1];
+                                            dls=table.rows[r-1].cells[c-1];
                                         }
                                     }
                                 }
@@ -181,14 +182,14 @@ export class MyComponent {
         }
         if((r>0 && r<size-1) && (c>0 && c<size-1))
         {
-            up=table[r-1][c];
-            down=table[r+1][c];
-            right=table[r][c+1];
-            left=table[r][c-1];
-            dls=table[r-1][c-1];
-            dli=table[r+1][c-1];
-            drs=table[r-1][c+1];
-            dri=table[r+1][c+1];
+            up=table.rows[r-1].cells[c];
+            down=table.rows[r+1].cells[c];
+            right=table.rows[r].cells[c+1];
+            left=table.rows[r].cells[c-1];
+            dls=table.rows[r-1].cells[c-1];
+            dli=table.rows[r+1].cells[c-1];
+            drs=table.rows[r-1].cells[c+1];
+            dri=table.rows[r+1].cells[c+1];
         }
         
         if(up!=undefined && up.style.backgroundColor=="white")
@@ -209,6 +210,7 @@ export class MyComponent {
             cont++;
         return cont;
     }
+}
 
 // Descartados
 
@@ -244,5 +246,5 @@ export class MyComponent {
         }
         body.appendChild(tabla);
         tabla.setAttribute('border', '.1');
-    }
-     */
+    }*/
+
